@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+  margin: 0;
+  padding: 0;
+}
+body * {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+.wd-main-css-heading {
+  color: green;
+  background-color: yellow;
+}
+
+.wd-bg-color-yellow {
+  background-color: #ffff07;
+}
+.wd-bg-color-blue {
+  background-color: #7070ff;
+}
+.wd-bg-color-red {
+  background-color: #ff7070;
+}
+.wd-bg-color-green {
+  background-color: green;
+}
+.wd-bg-color-black {
+  background-color: black;
+}
+
+.wd-flex-row-container {
+  display: flex;
+  flex-direction: row;
+}
+.wd-flex-grow-1 {
+  flex-grow: 1;
+}
+
+.fa-circle-check {
+  color: rgb(3, 133, 3);
+  margin-right: 40px;
+}
+
+.fa-book {
+  margin-right: 20px;
+  color: green;
+}
+
+.fa-plus,
+.fa-glasses {
+  margin-right: 3px;
+}
+
+.fa-bars {
+  margin-right: 10px;
+}
+
+.breadcrumb {
+  margin-left: 20px;
+  margin-top: 15px;
+}
+
+a,
+a:link,
+a:visited {
+  text-decoration: none !important;
+}
+
+.module-list {
+  border-radius: 0;
+}
+

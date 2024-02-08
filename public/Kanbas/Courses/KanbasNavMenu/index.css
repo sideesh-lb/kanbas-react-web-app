@@ -1,0 +1,25 @@
+.main-container {
+    padding: 10px;
+    margin: 30px;
+}
+
+.main-container2 {
+    padding: 10px;
+    margin: 30px;
+    color: rgb(196, 2, 2);
+}
+
+.navi-menu  a {
+    text-decoration: none;
+    text-emphasis: none;
+    color: rgb(196, 2, 2);
+}
+
+.navi-menu  li {
+    list-style: none;
+    padding: 10px;
+}
+
+.navi-menu  i {
+    padding-right:10px;
+}
