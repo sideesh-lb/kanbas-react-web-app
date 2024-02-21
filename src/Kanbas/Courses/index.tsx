@@ -2,7 +2,7 @@ import { courses } from "../Database";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { HiMiniBars3 } from "react-icons/hi2";
 import CourseNavigation from "./CourseNavigation";
-import { FaBars, FaGlasses } from 'react-icons/fa6';
+import { FaBars, FaChevronDown, FaGlasses } from 'react-icons/fa6';
 import './index.css'
 import { Link } from "react-router-dom";
 import CoursesModules from "./CourseModules";
@@ -17,6 +17,45 @@ const Courses = () => {
     const [empty, kanbas, courses_str, id, screen] = pathname.split('/');
     const course =  courses.find((course) => course._id === courseId)
   return (
+    <div>
+      <div className="d-block d-md-none">
+            <div className="wd_flex_row_container">
+              <div className="wd_flex_grow_1" style={{
+                backgroundColor: "black"
+              }}>
+                <div className="d-flex justify-content-around">
+                  <FaBars style={{
+                    color: "#ffffff",
+                    marginLeft: "10px", 
+                    marginTop: "12px"
+                  }}/>
+                  <p style={{
+                    color: "white", marginLeft: "25%", marginTop: "8px"
+                  }}>
+                    {course?.name}
+                  </p>
+                  <div className="float-end" style={{
+                    marginLeft: "22%",
+                    display: "flex"
+
+                  }}>
+                    <FaGlasses style={{
+                      color: "white",
+                      marginTop: "12px"
+                    }}/>
+
+                    <FaChevronDown style={{
+                      color: "white",
+                      marginTop: "12px",
+                      marginLeft: "12px",
+                      marginRight: "12px"
+                    }}/>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     <div className="main-content">
       <div className="navigation-bar d-none d-md-block wd-nav-align">
                 <nav
@@ -71,6 +110,7 @@ const Courses = () => {
             <Route path="Grades" element={<Grades/>} />
           </Routes>
       </div>
+    </div>
     </div>
   )
 }
