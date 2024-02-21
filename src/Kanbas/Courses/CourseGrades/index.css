@@ -1,0 +1,36 @@
+.input-parent{
+    display: flex;
+    justify-content: center;
+}
+.input-parent > input{
+    width: 100px;
+    border: 1px solid #b52828;
+    border-radius: 4px;
+}
+.input-parent > i{
+    margin-left: 10px;
+    margin-top: 3px;
+}
+.primary-bg{
+    background-color: aliceblue !important;
+}
+.grade-table{
+    max-width: 1300px;
+}
+
+.wd_flex_grow_1 {
+  flex-grow: 1;
+}
+
+.wd_flex_row_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.main-content-control .btn {
+    margin-left: 4px;
+}
+
+.name-td {
+    color: #b52828;
+}
