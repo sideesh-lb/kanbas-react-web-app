@@ -22,13 +22,23 @@ const Courses = () => {
     const [isCourseNavVisible, setIsCourseNavVisible] = useState(false);
 
     const toggleCourseNavVisibility = () => {
-      setIsCourseNavVisible(!isCourseNavVisible); // Switch between true and false
+      setIsCourseNavVisible(!isCourseNavVisible);
+
+      if (isNavVisible) {
+        toggleNavVisibility()
+      }
+
     };
 
     const [isNavVisible, setIsNavVisible] = useState(false);
 
     const toggleNavVisibility = () => {
-      setIsNavVisible(!isNavVisible); // Switch between true and false
+      setIsNavVisible(!isNavVisible);
+
+      if (isCourseNavVisible) {
+        toggleCourseNavVisibility()
+      }
+      
     };
 
     const links = [
