@@ -31,7 +31,11 @@ const CourseHomeContent = () => {
       width: '100%',
       overflow: 'hidden'
      }}>
-      <div className="d-flex float-end main-content-control">
+      <div className="float-end main-content-control" style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        marginBottom: '10px'
+      }}>
         <button
           className="btn"
           style={{ background: '#eeeeee', marginRight: '5px' }}

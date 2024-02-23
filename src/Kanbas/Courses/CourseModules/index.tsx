@@ -27,8 +27,15 @@ const CoursesModules = () => {
   };
   
   return (
-    <div className="flex-grow-1" style={{ margin: '20px 30px' }}>
-      <div className="d-flex float-end main-content-control">
+    <div className="" style={{ 
+      margin: '20px 30px',
+    width: '100%',
+    overflow: 'hidden' }}>
+      <div className="float-end main-content-control" style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        marginBottom: '10px'
+      }}>
         <button className="btn" style={{ background: '#eeeeee' }}>
           Collapse All
         </button>
