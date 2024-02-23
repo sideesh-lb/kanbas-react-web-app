@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import './index.css';
 import CourseHomeContent from './CourseHomeContent'
 import CourseStatusSection from './CourseSectionStatus'
 

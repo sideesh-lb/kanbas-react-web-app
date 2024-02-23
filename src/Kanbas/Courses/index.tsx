@@ -2,7 +2,7 @@ import { courses } from "../Database";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { HiMiniBars3 } from "react-icons/hi2";
 import CourseNavigation from "./CourseNavigation";
-import { FaBars, FaChevronDown, FaGlasses } from 'react-icons/fa6';
+import { FaBars, FaBullhorn, FaBullseye, FaChevronDown, FaFileLines, FaFilePen, FaFolder, FaGear, FaGlasses, FaNetworkWired, FaNewspaper, FaPaperPlane, FaPlug, FaRectangleList, FaRegCircle, FaRocketchat, FaUsersLine } from 'react-icons/fa6';
 import './index.css'
 import { Link } from "react-router-dom";
 import CoursesModules from "./CourseModules";
@@ -10,12 +10,22 @@ import CoursesHome from "./CourseHome";
 import CoursesAssignments from "./CourseAssingments";
 import CourseAssignmentEditor from "./CourseAssingments/CourseAssingmentEditor";
 import Grades from "./CourseGrades";
+import { useState } from "react";
+import CourseNavMenu from "./CourseNavMenu";
+import { FaHome } from "react-icons/fa";
 
 const Courses = () => {
     const { courseId } = useParams();
     const {pathname} = useLocation();
     const [empty, kanbas, courses_str, id, screen] = pathname.split('/');
     const course =  courses.find((course) => course._id === courseId)
+
+    const [isCourseNavVisible, setIsCourseNavVisible] = useState(false);
+
+    const toggleCourseNavVisibility = () => {
+      setIsCourseNavVisible(!isCourseNavVisible); // Switch between true and false
+    };
+
   return (
     <div>
       <div className="d-block d-md-none">
@@ -50,13 +60,124 @@ const Courses = () => {
                       marginTop: "12px",
                       marginLeft: "12px",
                       marginRight: "12px"
-                    }}/>
+                    }}
+                    onClick={toggleCourseNavVisibility}
+                    />
                     
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          {isCourseNavVisible && (
+            <div className="d-flex main-container2">
+            <div className="d-flex">
+                <ul className="navi-menu">
+                    <li >
+                        <FaHome/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Home`}
+                        onClick={toggleCourseNavVisibility}>
+                          Home</Link></li>
+
+                          <li >
+                        <FaNetworkWired/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Modules`}
+                        onClick={toggleCourseNavVisibility}>
+                          Modules</Link></li>
+                          <li >
+                          <FaPlug/>
+                        {/* <i class="fa-solid fa-home"></i> */}
+                        <Link to={`/Kanbas/Courses/${courseId}/Piazza`}
+                        onClick={toggleCourseNavVisibility}>
+                            Piazza</Link></li>
+                        <li>
+                        <FaFilePen/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Assignments`}
+                        onClick={toggleCourseNavVisibility}>
+                            Assignments</Link></li>
+
+                            <li>
+                        <FaPlug/>
+                        <Link to={`/Kanbas/Courses/${courseId}/ZoomMeetings`}
+                        onClick={toggleCourseNavVisibility}>
+                            Zoom Meetings</Link></li>
+
+                            <li>
+                        <FaPaperPlane/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Quizzes`}
+                        onClick={toggleCourseNavVisibility}>
+                            Quizzes</Link></li>
+
+                            <li>
+                        <FaRectangleList/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Grades`}
+                        onClick={toggleCourseNavVisibility}>
+                            Grades</Link></li>
+
+                            <li>
+                        <FaUsersLine/>
+                        <Link to={`/Kanbas/Courses/${courseId}/People`}
+                        onClick={toggleCourseNavVisibility}>
+                            People</Link></li>
+
+                            <li>
+                        <FaRocketchat/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Discussions`}
+                        onClick={toggleCourseNavVisibility}>
+                            Discussions</Link></li>
+
+                            <li>
+                        <FaBullhorn/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Announcements`}
+                        onClick={toggleCourseNavVisibility}>
+                            Announcements</Link></li>
+
+                            <li>
+                        <FaFileLines/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Pages`}
+                        onClick={toggleCourseNavVisibility}>
+                            Pages</Link></li>
+
+                            <li>
+                        <FaFolder/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Files`}
+                        onClick={toggleCourseNavVisibility}>
+                            Files</Link></li>
+
+                            <li>
+                        <FaNewspaper/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Rubrics`}
+                        onClick={toggleCourseNavVisibility}>
+                            Rubrics</Link></li>
+
+                            <li>
+                        <FaBullseye/>
+                        <Link to={`/Kanbas/Courses/${courseId}/OuteComes`}
+                        onClick={toggleCourseNavVisibility}>
+                            Outcomes</Link></li>
+
+                            <li>
+                        <FaRegCircle/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Collaborations`}
+                        onClick={toggleCourseNavVisibility}>
+                            Collaborations</Link></li>
+
+                            <li>
+                        <FaNewspaper/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Syllabus`}
+                        onClick={toggleCourseNavVisibility}>
+                            Syllabus</Link></li>
+
+                            <li>
+                        <FaGear/>
+                        <Link to={`/Kanbas/Courses/${courseId}/Settings`}
+                        onClick={toggleCourseNavVisibility}>
+                            Settings</Link></li>
+                        
+                </ul>
+            </div>
+        </div>
+          )}
     <div className="main-content" style={{
       overflowX: 'hidden',
       width: "100%"
