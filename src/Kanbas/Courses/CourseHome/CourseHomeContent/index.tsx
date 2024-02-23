@@ -26,7 +26,11 @@ const CourseHomeContent = () => {
     }));
   };
   return (
-    <div className="flex-grow-1" style={{ margin: '20px 30px' }}>
+    <div className="" style={{ 
+      margin: '20px 30px',
+      width: '100%',
+      overflow: 'hidden'
+     }}>
       <div className="d-flex float-end main-content-control">
         <button
           className="btn"

@@ -5,7 +5,11 @@ import CourseStatusSection from './CourseSectionStatus'
 
 const CoursesHome = () => {
   return (
-    <div className="flex-grow-1">
+    <div className="" style={{
+      width: '100%',
+      overflowX: 'hidden'
+    }
+    }>
         <div className="d-flex">
           <CourseHomeContent />
           <CourseStatusSection />

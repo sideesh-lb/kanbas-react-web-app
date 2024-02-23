@@ -21,7 +21,8 @@ const Courses = () => {
       <div className="d-block d-md-none">
             <div className="wd_flex_row_container">
               <div className="wd_flex_grow_1" style={{
-                backgroundColor: "black"
+                backgroundColor: "black",
+                marginBottom: '10px'
               }}>
                 <div className="d-flex justify-content-around">
                   <FaBars style={{

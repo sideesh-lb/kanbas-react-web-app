@@ -14,6 +14,7 @@ const Grades = () => {
       marginLeft: '30px',
       marginRight: '30px',
       width: '100%',
+      overflow: 'hidden',
       flexDirection: 'column'
     }}>
       <div className='wd_flex_row_container' style={{
