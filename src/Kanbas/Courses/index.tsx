@@ -2,7 +2,7 @@ import { courses } from "../Database";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { HiMiniBars3 } from "react-icons/hi2";
 import CourseNavigation from "./CourseNavigation";
-import { FaBars, FaBullhorn, FaBullseye, FaChevronDown, FaFileLines, FaFilePen, FaFolder, FaGear, FaGlasses, FaNetworkWired, FaNewspaper, FaPaperPlane, FaPlug, FaRectangleList, FaRegCircle, FaRocketchat, FaUsersLine } from 'react-icons/fa6';
+import { FaBars, FaBook, FaBullhorn, FaBullseye, FaChevronDown, FaClock, FaFileLines, FaFilePen, FaFolder, FaGear, FaGlasses, FaInbox, FaNetworkWired, FaNewspaper, FaPaperPlane, FaPlug, FaRectangleList, FaRegCircle, FaRocketchat, FaUsersLine, FaYoutube } from 'react-icons/fa6';
 import './index.css'
 import { Link } from "react-router-dom";
 import CoursesModules from "./CourseModules";
@@ -11,8 +11,7 @@ import CoursesAssignments from "./CourseAssingments";
 import CourseAssignmentEditor from "./CourseAssingments/CourseAssingmentEditor";
 import Grades from "./CourseGrades";
 import { useState } from "react";
-import CourseNavMenu from "./CourseNavMenu";
-import { FaHome } from "react-icons/fa";
+import { FaHome, FaQuestionCircle, FaRegArrowAltCircleRight, FaRegCalendarAlt, FaRegUserCircle, FaTachometerAlt } from "react-icons/fa";
 
 const Courses = () => {
     const { courseId } = useParams();
@@ -25,6 +24,24 @@ const Courses = () => {
     const toggleCourseNavVisibility = () => {
       setIsCourseNavVisible(!isCourseNavVisible); // Switch between true and false
     };
+
+    const [isNavVisible, setIsNavVisible] = useState(false);
+
+    const toggleNavVisibility = () => {
+      setIsNavVisible(!isNavVisible); // Switch between true and false
+    };
+
+    const links = [
+      { label: "Account",   icon: <FaRegUserCircle className="fs-2" />  },
+      { label: "Dashboard", icon: <FaTachometerAlt className="fs-2" />  },
+      { label: "Courses",   icon: <FaBook className="fs-2" />           },
+      { label: "Calendar",  icon: <FaRegCalendarAlt className="fs-2" /> },
+      { label: "Inbox",  icon: <FaInbox className="fs-2" /> },
+      { label: "History",  icon: <FaClock className="fs-2" /> },
+      { label: "Studio",  icon: <FaYoutube className="fs-2" /> },
+      { label: "Common",  icon: <FaRegArrowAltCircleRight className="fs-2" /> },
+      { label: "Help",  icon: <FaQuestionCircle className="fs-2" /> },
+    ];
 
   return (
     <div>
@@ -39,7 +56,9 @@ const Courses = () => {
                     color: "#ffffff",
                     marginLeft: "10px", 
                     marginTop: "12px"
-                  }}/>
+                  }}
+                  onClick={toggleNavVisibility}
+                  />
                   <p style={{
                     color: "white", marginLeft: "25%", marginTop: "8px"
                   }}>
@@ -69,6 +88,24 @@ const Courses = () => {
               </div>
             </div>
           </div>
+          {isNavVisible && (
+            <div className="d-flex main-container2">
+            <div className="d-flex">
+                <ul className="navi-menu">
+                {links.map((link, index) => (
+                    <li key={index} className={pathname.includes(link.label) ? "wd-active" : ""}>
+                    <Link to={`/Kanbas/${link.label}`}
+                    onClick={toggleNavVisibility}
+                    > 
+                        {link.label}
+                    </Link>
+                    </li>
+                ))}
+                </ul>
+              </div>
+            </div>
+          )}
+
           {isCourseNavVisible && (
             <div className="d-flex main-container2">
             <div className="d-flex">
@@ -193,6 +230,7 @@ const Courses = () => {
                           color: 'rgb(196, 2, 2)',
                           marginRight: '10px',
                         }}
+                        
                       ></FaBars>
                       <Link
                         to={`/Kanbas/Courses/${courseId}/Home`}
