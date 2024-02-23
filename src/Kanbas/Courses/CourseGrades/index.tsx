@@ -10,9 +10,10 @@ const Grades = () => {
   const es = enrollments.filter((enrollment) => enrollment.course === courseId);
 
   return (
-    <div className="wd_flex_grow_1" style={{
+    <div className="" style={{
       marginLeft: '30px',
       marginRight: '30px',
+      width: '100%',
       flexDirection: 'column'
     }}>
       <div className='wd_flex_row_container' style={{
@@ -20,7 +21,7 @@ const Grades = () => {
       }}>
       <div className="wd_flex_grow_1"></div>
       <div className="d-flex float-end main-content-control">
-        <div className="flex-grow-1"></div>
+        <div className=""></div>
           <button className="btn" style={{
             background: "#eeeeee",
             marginRight: "5px"
@@ -84,8 +85,17 @@ const Grades = () => {
           }}/>Apply Filters
         </button>
         <hr />
-        <div className="table-responsive grade-table">
-          <table className="table table-striped table-bordered">
+        {/* <div className='chumma'>
+          <div>
+          hellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohellohello
+          </div>
+        </div> */}
+        <div className="table-responsive grade-table" style={{
+          width: '100%'
+        }}>
+          <table className="table table-striped table-bordered" style={{
+            width: '100%'
+          }}>
             <thead>
             <tr className="table-secondary">
               <th >Student Name</th>

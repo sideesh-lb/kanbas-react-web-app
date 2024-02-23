@@ -34,3 +34,10 @@
 .name-td {
     color: #b52828;
 }
+
+.chumma {
+    background-color: aquamarine;
+    /* flex-grow: 1; */
+    width: 100%;
+    overflow-x: scroll;
+}

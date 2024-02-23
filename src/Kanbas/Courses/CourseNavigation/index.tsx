@@ -12,7 +12,7 @@ const CourseNavigation = () => {
 
     const { pathname } = useLocation();
   return (
-    <div className='d-flex courseNav'>
+    <div className='d-flex'>
         <ul className="wd-navigation d-none d-md-block">
             {links.map((link, index) => (
             <li key={index} className={pathname.includes(link) ? "wd-active" : ""}>

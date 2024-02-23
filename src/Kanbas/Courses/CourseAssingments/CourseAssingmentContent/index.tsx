@@ -47,7 +47,7 @@ const CourseAssignmentContent = () => {
       </div>
 
       <hr />
-      <ul className="wd-flex-grow-1 list-group module-list">
+      <ul className="wd_flex_grow_1 list-group module-list">
         <li className="list-group-item list-group-item-secondary">
           <FontAwesomeIcon
             icon={faGripVertical}
@@ -94,19 +94,21 @@ const CourseAssignmentContent = () => {
                       <strong>{assignment.title}</strong>
                     </Link>
                   </strong>
+                  <div className='wd_flex_row_container'>
+                      <div className=''
+                      style={{
+                        marginLeft: '70px',
+                        color: '#686464',
+                        width: '100%',
+                      }}
+                    >
+                      <span style={{ fontSize: '15px', marginBottom: '1px' }}>
+                        {assignment?.description}
+                      </span>
+                      <p>{assignment.due}</p>
+                    </div>
+                      </div>
                 </span>
-                <div
-                  style={{
-                    marginLeft: '70px',
-                    color: '#686464',
-                    width: '600px',
-                  }}
-                >
-                  <span style={{ fontSize: '15px', marginBottom: '1px' }}>
-                    {assignment?.description}
-                  </span>
-                  <p>{assignment.due}</p>
-                </div>
               </div>
             </li>
           ))}

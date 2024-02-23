@@ -8,7 +8,11 @@ function Kanbas() {
    return(
       <div className="d-flex">
          <KanbasNavigation/>
-         <div style={{ flexGrow: 1 }}>
+         <div style={{ 
+            // flexGrow: 1,
+         overflow: 'hidden', 
+         width: '100%'
+         }}>
             {/* <Dashboard/> */}
             <Routes>
                <Route path="/" element={<Navigate to="Dashboard" />} />

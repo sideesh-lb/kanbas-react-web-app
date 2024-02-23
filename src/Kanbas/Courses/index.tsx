@@ -56,7 +56,10 @@ const Courses = () => {
               </div>
             </div>
           </div>
-    <div className="main-content">
+    <div className="main-content" style={{
+      overflowX: 'hidden',
+      width: "100%"
+    }}>
       <div className="navigation-bar d-none d-md-block wd-nav-align">
                 <nav
                   className="wd_breadcrumb top-nav"

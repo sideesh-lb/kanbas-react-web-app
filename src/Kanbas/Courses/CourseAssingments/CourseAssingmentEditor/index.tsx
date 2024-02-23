@@ -18,13 +18,13 @@ const CourseAssignmentEditor = () => {
   return (
     <div className="flex-grow-1" style={{ margin: '20px 30px' }}>
       {/* <div className="wd_flex_row_container"> */}
-        <div className="d-flex">
+        <div className="d-flex flex-row">
           <div
             className="flex-grow-1"
             style={{ marginLeft: '30px', marginRight: '30px' }}
           >
-            <div className="wd-flex-row-container">
-              <div className="wd-flex-grow-1"></div>
+            <div className="wd_flex_row_container">
+              <div className="wd_flex_grow_1"></div>
               <div className="d-flex float-end main-content-control">
                 <div className="flex-grow-1"></div>
                 <p
