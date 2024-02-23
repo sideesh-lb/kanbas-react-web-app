@@ -63,3 +63,30 @@ padding: 0px;
   margin-left: 0px;
 }
 }
+
+.cNavMenu {
+  width: 100%;
+}
+
+.main-container2 {
+  color: rgb(196, 2, 2);
+}
+
+.navi-menu  a {
+  text-decoration: none;
+  text-emphasis: none;
+  color: rgb(196, 2, 2);
+  margin-left: 10px;
+}
+
+.navi-menu  li {
+  list-style: none;
+}
+
+.navi-menu  i {
+  padding-right:10px;
+}
+
+.wd-active {
+  font-weight: bold;
+}

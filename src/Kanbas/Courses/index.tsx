@@ -64,8 +64,8 @@ const Courses = () => {
                 <div className="d-flex justify-content-around">
                   <FaBars style={{
                     color: "#ffffff",
-                    marginLeft: "10px", 
-                    marginTop: "12px"
+                    marginLeft: "20px", 
+                    marginTop: "15px"
                   }}
                   onClick={toggleNavVisibility}
                   />
@@ -99,7 +99,7 @@ const Courses = () => {
             </div>
           </div>
           {isNavVisible && (
-            <div className="d-flex main-container2">
+            <div className="d-flex d-md-none main-container2">
             <div className="d-flex">
                 <ul className="navi-menu">
                 {links.map((link, index) => (
@@ -117,7 +117,7 @@ const Courses = () => {
           )}
 
           {isCourseNavVisible && (
-            <div className="d-flex main-container2">
+            <div className="d-flex d-md-none main-container2">
             <div className="d-flex">
                 <ul className="navi-menu">
                     <li >
