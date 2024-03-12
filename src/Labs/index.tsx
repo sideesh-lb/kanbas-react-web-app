@@ -2,10 +2,13 @@ import { Link, Route, Routes } from "react-router-dom";
 import Nav from "../Nav";
 import Assignment3 from "./a3";
 import Assignment4 from "./a4";
+import store from "./store";
+import { Provider } from "react-redux";
 
 function Labs() {
    return (
-      <div className="container">
+      <Provider store={store}>
+         <div className="container">
          {/* <h1>Assignment 3</h1> */}
          <Nav/>
          <Link to="/Labs/a3">Assignment 3</Link> |
@@ -16,6 +19,7 @@ function Labs() {
          </Routes>
 
       </div>
+      </Provider>
    );
 }
 export default Labs;
