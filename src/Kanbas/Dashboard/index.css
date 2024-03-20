@@ -90,3 +90,7 @@ padding: 0px;
 .wd-active {
   font-weight: bold;
 }
+
+.btn-warning{
+  margin-right: 15px;
+}

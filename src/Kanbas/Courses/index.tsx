@@ -13,7 +13,7 @@ import Grades from "./CourseGrades";
 import { useState } from "react";
 import { FaHome, FaQuestionCircle, FaRegArrowAltCircleRight, FaRegCalendarAlt, FaRegUserCircle, FaTachometerAlt } from "react-icons/fa";
 
-const Courses = () => {
+const Courses = ({ courses }: { courses: any[]; }) => {
     const { courseId } = useParams();
     const {pathname} = useLocation();
     const [empty, kanbas, courses_str, id, screen] = pathname.split('/');

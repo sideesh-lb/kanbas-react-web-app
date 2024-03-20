@@ -29,3 +29,7 @@ a:visited {
 .module-list {
   border-radius: 0;
 }
+
+.deleteButton {
+  margin-left: 10px;
+}

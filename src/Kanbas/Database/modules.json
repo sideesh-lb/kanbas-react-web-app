@@ -57,7 +57,7 @@
     ]
   },
   {
-    "_id": "M01",
+    "_id": "M04",
     "name": "Week 0",
     "description": "CS5610.38921.202330",
     "course": "CS5610",
@@ -74,7 +74,7 @@
     ]
   },
   {
-    "_id": "M02",
+    "_id": "M05",
     "name": "Week 1",
     "description": "CS5610.38921.202330",
     "course": "CS5610",
@@ -91,7 +91,7 @@
     ]
   },
   {
-    "_id": "M01",
+    "_id": "M06",
     "name": "Week 0",
     "description": "CS4560.38921.202330",
     "course": "CS4560",
@@ -108,7 +108,7 @@
     ]
   },
   {
-    "_id": "M02",
+    "_id": "M07",
     "name": "Week 1",
     "description": "CS4560.38921.202330",
     "course": "CS4560",
@@ -125,7 +125,7 @@
     ]
   },
   {
-    "_id": "M01",
+    "_id": "M08",
     "name": "Week 0",
     "description": "CS5710.38921.202330",
     "course": "CS5710",
@@ -142,7 +142,7 @@
     ]
   },
   {
-    "_id": "M02",
+    "_id": "M09",
     "name": "Week 1",
     "description": "CS5710.38921.202330",
     "course": "CS5710",

@@ -9,6 +9,14 @@ import {
   faEllipsisV,
   faGripVertical,
 } from '@fortawesome/free-solid-svg-icons';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addModule,
+  deleteModule,
+  updateModule,
+  setModule,
+} from "./reducer";
+import { KanbasState } from "../../store";
 
 interface ExpandedModules {
   [key: number]: boolean;
@@ -18,6 +26,11 @@ const CoursesModules = () => {
   const { courseId } = useParams();
   console.log("courseId " +courseId)
   const [expandedModules, setExpandedModules] = useState<ExpandedModules>({});
+  const moduleList = useSelector((state: KanbasState) => 
+    state.modulesReducer.modules);
+  const module = useSelector((state: KanbasState) => 
+    state.modulesReducer.module);
+  const dispatch = useDispatch();
 
   const toggleModule = (index: number) => {
     setExpandedModules((prevState) => ({
@@ -79,8 +92,50 @@ const CoursesModules = () => {
       </div>
       <br />
       <hr />
+      <h4>Add/Update a Module</h4>
+      <div className="row">
+        <div className="col">
+          <input
+            value={module.name}
+            placeholder="Enter the Module Name"
+            className="form-control"
+            onChange={(e) =>
+              dispatch(setModule({ ...module, name: e.target.value }))
+            }
+          />
+        </div>
+      </div>
+      <br />
+      <div className="row">
+        <div className="col">
+          <textarea
+            value={module.description}
+            placeholder="Enter the Module Description"
+            className="form-control"
+            onChange={(e) =>
+              dispatch(setModule({ ...module, description: e.target.value }))
+            }
+          />
+        </div>
+      </div>
+      <div style={{ marginTop: '5px' }}>
+        <button
+          className="btn btn-success"
+          onClick={() => dispatch(addModule({ ...module, course: courseId }))}
+          style={{ marginRight: '5px' }}
+        >
+          Add
+        </button>
+        <button
+          className="btn btn-primary"
+          onClick={() => dispatch(updateModule(module))}
+        >
+          Update
+        </button>
+      </div>
+      <br/>
       <ul className="list-group module-list">
-        {modules
+        {moduleList
           .filter((module) => module.course === courseId)
           .map((module, index) => (
             <div key={index}>
@@ -88,12 +143,16 @@ const CoursesModules = () => {
                 className="list-group-item list-group-item-secondary"
                 onClick={() => toggleModule(index)}
               >
-                <div className="flex-container">
+                <div className="flex-container" style={{
+                  paddingBottom: "10px"
+                }}>
                   <FontAwesomeIcon
                     icon={faGripVertical}
                     style={{ marginRight: '10px' }}
                   />
                   {module.name}
+                  <br />
+                  {module.description}
                   <div className="float-end">
                     <FontAwesomeIcon
                       icon={faCheckCircle}
@@ -104,13 +163,22 @@ const CoursesModules = () => {
                       icon={faEllipsisV}
                       style={{ color: '#787878', marginLeft: '8px' }}
                     />
+                    <button className='btn btn-warning btn-sm'
+                            style={{ marginLeft: '10px' }}
+                            onClick={() => dispatch(setModule(module))}>
+                      Edit
+                    </button>
+                     <button className='btn btn-danger btn-sm'
+                      onClick={() => dispatch(deleteModule(module._id))}>
+                      Delete
+                    </button>
                   </div>
                 </div>
               </li>
 
               {expandedModules[index] &&
                 module.learningObjectives &&
-                module.learningObjectives.map((lesson, lessonIndex) => (
+                module.learningObjectives.map((lesson: any, lessonIndex:number) => (
                   <li
                     key={lessonIndex}
                     className="list-group-item"

@@ -1,20 +1,46 @@
 import { Button } from 'react-bootstrap';
 import '../../../../index.css';
-import { assignments } from '../../../Database';
 import { FaCircleCheck, FaEllipsisVertical } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-
+ 
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addAssignment,
+  deleteAssignment,
+  updateAssignment,
+  setAssignment,
+  resetAssignment,
+} from "../reducer";
+import { KanbasState } from "../../../store";
+import { useEffect } from 'react';
+ 
 const CourseAssignmentEditor = () => {
   const { assignmentId, courseId } = useParams();
-  const assignment = assignments.find(
-    (assignment) => assignment._id === assignmentId
-  );
-
+  const assignmentsList = useSelector((state: KanbasState) =>
+  state.assignmentReducer.assignments);
+const dispatch = useDispatch();
+ 
+const assignment = useSelector((state: KanbasState) =>
+  state.assignmentReducer.assignment
+)
+ 
+  useEffect(( ) => {
+    if(assignmentId){
+      dispatch(setAssignment(assignmentsList.find(assignment => assignment._id === assignmentId)));
+    }
+  },[])
+ 
   const navigate = useNavigate();
-  const handleSave = () => {
+ 
+  const handleSave = (assignment: any) => {
+    assignment?._id ? dispatch(updateAssignment({ ...assignment, course: courseId }))
+    : dispatch(addAssignment({ ...assignment, course: courseId }));
+ 
+    dispatch(resetAssignment());
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);
   };
+ 
   return (
     <div className="flex-grow-1" style={{ margin: '20px 30px' }}>
       {/* <div className="wd_flex_row_container"> */}
@@ -34,6 +60,7 @@ const CourseAssignmentEditor = () => {
                     color: 'green',
                   }}
                 >
+                  {/* {assignment.description} */}
                   <FaCircleCheck style={{ marginRight: '3px' }} />
                   Published
                 </p>
@@ -47,19 +74,31 @@ const CourseAssignmentEditor = () => {
               <input
                 type="text"
                 className="form-control"
-                value={assignment!.title}
+                onChange={(e:any) =>
+                  dispatch(setAssignment({ ...assignment, title: e.target.value }))
+                }
+                value={assignment?.title}
+                
               />
             </div>
             <div className="mb-3">
-              <textarea className="form-control" rows={3}>
-                {assignment!.description}
+              <textarea className="form-control" rows={3}
+              onChange={(e:any) =>
+                dispatch(setAssignment({ ...assignment, description: e.target.value }))
+              }
+              value ={assignment?.description}
+              >
+                {assignment?.description}
               </textarea>
             </div>
             <div className="container">
               <div className="row">
                 <div className="col-2">Points</div>
                 <div className="col-6">
-                  <input type="text" className="form-control" value="100" />
+                  <input type="text" className="form-control" value={assignment?.points}
+                  onChange={(e) =>
+                    dispatch(setAssignment({ ...assignment, points: e.target.value }))
+                  }/>
                 </div>
               </div>
               <br />
@@ -232,16 +271,27 @@ const CourseAssignmentEditor = () => {
                   </select>
                   <br />
                   Due
-                  <input type="date" className="form-control" />
+                  <input type="date" className="form-control" value={(assignment?.dueDate)}
+                  onChange={(e) =>
+                    dispatch(setAssignment({ ...assignment, dueDate: e.target.value }))
+                  }
+                  />
                   <br />
                   <div className="row">
                     <div className="col-3">
                       Available From{' '}
-                      <input type="date" className="form-control" />
+                      <input type="date" className="form-control" value={(assignment?.availableFromDate)}
+                      onChange={(e) =>
+                        dispatch(setAssignment({ ...assignment, availableFromDate: e.target.value }))
+                      }
+                      />
                     </div>
                     <div className="col-3">
                       Until
-                      <input type="date" className="form-control" />
+                      <input type="date" className="form-control" value={(assignment?.availableUntilDate)}
+                      onChange={(e) =>
+                        dispatch(setAssignment({ ...assignment, availableUntilDate: e.target.value }))
+                      } />
                     </div>
                   </div>
                 </div>
@@ -262,7 +312,8 @@ const CourseAssignmentEditor = () => {
                   </div>
                 </div>
                 <div className="col-6 float-end">
-                  <button className="btn">
+                  <button className="btn" onClick={() => dispatch(resetAssignment())}
+                  >
                     <Link
                       to={`/Kanbas/Courses/${courseId}/Assignments`}
                       className="btn btn-secondary"
@@ -270,7 +321,7 @@ const CourseAssignmentEditor = () => {
                       Cancel
                     </Link>
                   </button>
-                  <button className="btn btn-danger" onClick={handleSave}>
+                  <button className="btn btn-danger" onClick={() => handleSave(assignment)}>
                     Save
                   </button>
                 </div>
@@ -283,5 +334,5 @@ const CourseAssignmentEditor = () => {
     </div>
   );
 };
-
+ 
 export default CourseAssignmentEditor;
