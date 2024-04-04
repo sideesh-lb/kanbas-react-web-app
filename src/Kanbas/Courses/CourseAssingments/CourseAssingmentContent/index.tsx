@@ -18,12 +18,16 @@ import {
   deleteAssignment,
   updateAssignment,
   setAssignment,
+  setAssignments,
   resetAssignment,
 } from "../reducer";
+
 import { KanbasState } from "../../../store";
 import CourseAssignmentEditor from '../CourseAssingmentEditor';
 import { Button, Modal } from 'react-bootstrap';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import * as client from "../client";
 
 
 const CourseAssignmentContent = () => {
@@ -55,6 +59,18 @@ const CourseAssignmentContent = () => {
     dispatch(deleteAssignment(aId));
     handleCloseModal();
   };
+
+  const handleDeleteAssignment = (assignmentId: string) => {
+    client.deleteAssignment(assignmentId).then((status) => {
+      dispatch(deleteAssignment(assignmentId));
+      handleCloseModal();
+    });
+  };
+
+  useEffect(() => {
+    client.findAssignmentsForCourse(String(courseId)).then((assignments) => 
+    dispatch(setAssignments(assignments)));
+  }, [courseId]);
 
   return (
     <div className="flex-grow-1" style={{ margin: '30px' }}>
@@ -137,7 +153,7 @@ const CourseAssignmentContent = () => {
                     <Modal.Body>Are you sure you want to delete this assignment?</Modal.Body>
                     <Modal.Footer>
                       <Button variant="secondary" onClick={handleCloseModal}>No</Button>
-                      <Button variant="danger" onClick={() => handleDelete()}>Yes</Button>
+                      <Button variant="danger" onClick={() =>handleDeleteAssignment(aId)}>Yes</Button>
                     </Modal.Footer>
                   </Modal>
 

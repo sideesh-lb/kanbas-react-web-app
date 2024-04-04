@@ -3,6 +3,8 @@ import '../../../../index.css';
 import { FaCircleCheck, FaEllipsisVertical } from 'react-icons/fa6';
 import { useNavigate, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
+
+import * as client from '../client';
  
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -27,15 +29,29 @@ const assignment = useSelector((state: KanbasState) =>
  
   useEffect(( ) => {
     if(assignmentId){
-      dispatch(setAssignment(assignmentsList.find(assignment => assignment._id === assignmentId)));
+      client.findAssignmentById(String(assignmentId)).then((assignment) => 
+    dispatch(setAssignment(assignment))
+    );
     }
-  },[])
+  },[assignmentId]);
  
   const navigate = useNavigate();
  
-  const handleSave = (assignment: any) => {
-    assignment?._id ? dispatch(updateAssignment({ ...assignment, course: courseId }))
-    : dispatch(addAssignment({ ...assignment, course: courseId }));
+  const handleAddAssignment = async () => {
+    client.createAssignment(String(courseId), assignment).then((assignment) => 
+    dispatch(addAssignment(assignment)));
+  };
+
+  const handleUpdateAssignment = async () => {
+    const status = await client.updateAssignment(assignment);
+    console.log(assignmentsList.length);
+    dispatch(updateAssignment(assignment));
+    console.log(assignmentsList.length);
+  }
+ 
+  const handleSave = async (assignment: any) => {
+    assignment?._id ? handleUpdateAssignment()
+    : handleAddAssignment();
  
     dispatch(resetAssignment());
     navigate(`/Kanbas/Courses/${courseId}/Assignments`);

@@ -3,14 +3,17 @@ import Nav from "../Nav"
 import Dashboard from "./Dashboard";
 import KanbasNavigation from "./Navigation";
 import Courses from "./Courses";
-import { db } from './Database';
-import { useState } from "react";
+// import { db } from './Database';
+import axios from 'axios';
+import { useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import store from "./store";
 
+const API_BASE = process.env.REACT_APP_API_BASE;
 
 function Kanbas() {
-   const [courses, setCourses] = useState(db.courses)
+   const [courses, setCourses] = useState<any[]>([]);
+   const COURSES_API = `${API_BASE}/api/courses`;
 
 
     const [course,setCourse] = useState({_id: "", name: "", number: "",
@@ -18,17 +21,34 @@ function Kanbas() {
     description: "",
     image: ""});
 
-    const addNewCourse = () => {
-      const newCourse = { ...course, _id: new Date().getTime().toString() };
-      setCourses([...courses, { ...course, ...newCourse }]);
+    const findAllCourses = async() => {
+      const response = await axios.get(COURSES_API);
+      setCourses(response.data);
+    };
+
+    useEffect(() => {
+      findAllCourses();
+    }, []);
+
+    const addNewCourse = async() => {
+      const response = await axios.post(COURSES_API, course);
+      // const newCourse = { ...course, _id: new Date().getTime().toString() };
+      setCourses([...courses, response.data]);
 
     };
 
-    const deleteCourse = (courseId: string) => {
+    const deleteCourse = async(courseId: string) => {
+      const response = await axios.delete(
+        `${COURSES_API}/${courseId}`);
       setCourses(courses.filter((course) => course._id !== courseId));
     };
   
-    const updateCourse = () => {
+    const updateCourse = async() => {
+      const response = await axios.put(
+        `${COURSES_API}/${course._id}`,
+        course
+      );
+
       setCourses(
         courses.map((c) => {
           if (c._id === course._id) {
@@ -59,7 +79,7 @@ function Kanbas() {
                 addNewCourse={addNewCourse}
                 deleteCourse={deleteCourse}
                 updateCourse={updateCourse} />} />
-               <Route path="Courses/:courseId/*" element={<Courses courses={courses} />} />
+               <Route path="Courses/:courseId/*" element={<Courses/>} />
             </Routes>
          </div>
       </div>

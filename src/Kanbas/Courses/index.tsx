@@ -1,4 +1,4 @@
-import { courses } from "../Database";
+// import { courses } from "../Database";
 import { Navigate, Route, Routes, useLocation, useParams } from "react-router";
 import { HiMiniBars3 } from "react-icons/hi2";
 import CourseNavigation from "./CourseNavigation";
@@ -10,14 +10,26 @@ import CoursesHome from "./CourseHome";
 import CoursesAssignments from "./CourseAssingments";
 import CourseAssignmentEditor from "./CourseAssingments/CourseAssingmentEditor";
 import Grades from "./CourseGrades";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { FaHome, FaQuestionCircle, FaRegArrowAltCircleRight, FaRegCalendarAlt, FaRegUserCircle, FaTachometerAlt } from "react-icons/fa";
 
-const Courses = ({ courses }: { courses: any[]; }) => {
+const API_BASE = process.env.REACT_APP_API_BASE;
+
+const Courses = () => {
+    const COURSES_API = `${API_BASE}/api/courses`;
+    
     const { courseId } = useParams();
     const {pathname} = useLocation();
     const [empty, kanbas, courses_str, id, screen] = pathname.split('/');
-    const course =  courses.find((course) => course._id === courseId)
+    const [course, setCourse] = useState<any>({ _id: "" });
+
+    const findCourseById = async (courseId?: string) => {
+      const response = await axios.get(
+        `${COURSES_API}/${courseId}`
+      );
+      setCourse(response.data);
+    };
 
     const [isCourseNavVisible, setIsCourseNavVisible] = useState(false);
 
@@ -52,6 +64,10 @@ const Courses = ({ courses }: { courses: any[]; }) => {
       { label: "Common",  icon: <FaRegArrowAltCircleRight className="fs-2" /> },
       { label: "Help",  icon: <FaQuestionCircle className="fs-2" /> },
     ];
+
+    useEffect(() => {
+      findCourseById(courseId);
+    }, [courseId])
 
   return (
     <div>

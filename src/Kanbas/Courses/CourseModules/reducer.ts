@@ -1,20 +1,35 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { modules } from "../../Database";
 import { useParams } from "react-router";
 
+interface Module {
+  _id: string;
+  name: string;
+  description: string;
+}
 
-const initialState = {
-  modules: modules,
-  module: { name: "", description: ""},
+interface ModulesState {
+  modules: Module[];
+  module: Module;
+}
+
+
+const initialState: ModulesState = {
+  modules: [],
+  module: {_id: "", name: "", description: ""},
 };
 
 const modulesSlice = createSlice({
   name: "modules",
   initialState,
   reducers: {
+    
+    setModules: (state, action) => {
+      state.modules = action.payload;
+    },
+
     addModule: (state, action) => {
       state.modules = [
-        { ...action.payload, _id: new Date().getTime().toString() },
+        { ...action.payload, },
           ...state.modules,
       ];
     },
@@ -39,6 +54,6 @@ const modulesSlice = createSlice({
 });
 
 
-export const { addModule, deleteModule,
+export const { addModule, deleteModule, setModules,
   updateModule, setModule } = modulesSlice.actions;
 export default modulesSlice.reducer;

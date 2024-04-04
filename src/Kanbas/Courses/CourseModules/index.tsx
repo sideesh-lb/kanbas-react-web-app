@@ -1,9 +1,8 @@
 import { Dropdown } from 'react-bootstrap';
 import { FaCircleCheck, FaEllipsisVertical, FaPlus } from 'react-icons/fa6';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { modules } from '../../Database';
 import { useParams } from 'react-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   faCheckCircle,
   faEllipsisV,
@@ -15,7 +14,11 @@ import {
   deleteModule,
   updateModule,
   setModule,
+  setModules,
 } from "./reducer";
+
+import * as client from "./client";
+// import { findModulesForCourse, createModule } from "./client";
 import { KanbasState } from "../../store";
 
 interface ExpandedModules {
@@ -38,6 +41,28 @@ const CoursesModules = () => {
       [index]: !prevState[index],
     }));
   };
+
+  const handleAddModule = () => {
+    client.createModule(String(courseId), module).then((module) => {
+      dispatch(addModule(module));
+      });
+  };
+
+  const handleDeleteModule = (moduleId: string) => {
+    client.deleteModule(moduleId).then((status) => {
+      dispatch(deleteModule(moduleId));
+    });
+  };
+
+  const handleUpdateModule = async() => {
+    const status = await client.updateModule(module);
+    dispatch(updateModule(module));
+  }
+
+  useEffect(() => {
+    client.findModulesForCourse(String(courseId)).then((modules) => 
+    dispatch(setModules(modules)));
+  }, [courseId]);
   
   return (
     <div className="" style={{ 
@@ -121,14 +146,14 @@ const CoursesModules = () => {
       <div style={{ marginTop: '5px' }}>
         <button
           className="btn btn-success"
-          onClick={() => dispatch(addModule({ ...module, course: courseId }))}
+          onClick={handleAddModule}
           style={{ marginRight: '5px' }}
         >
           Add
         </button>
         <button
           className="btn btn-primary"
-          onClick={() => dispatch(updateModule(module))}
+          onClick={handleUpdateModule}
         >
           Update
         </button>
@@ -169,7 +194,7 @@ const CoursesModules = () => {
                       Edit
                     </button>
                      <button className='btn btn-danger btn-sm'
-                      onClick={() => dispatch(deleteModule(module._id))}>
+                      onClick={() => handleDeleteModule(module._id)}>
                       Delete
                     </button>
                   </div>
