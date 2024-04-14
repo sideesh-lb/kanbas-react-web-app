@@ -64,6 +64,7 @@ export default function UserTable() {
     setUsers(users);
   };
   useEffect(() => { fetchUsers(); }, []);
+  
   return (
     <div>
         <select style={{marginTop:10}}
