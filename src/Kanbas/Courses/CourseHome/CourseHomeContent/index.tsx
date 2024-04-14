@@ -3,12 +3,14 @@ import { FaCircleCheck, FaEllipsisVertical, FaPlus } from 'react-icons/fa6';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { modules } from '../../../Database';
 import { useParams } from 'react-router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   faCheckCircle,
   faEllipsisV,
   faGripVertical,
 } from '@fortawesome/free-solid-svg-icons';
+
+import * as client from '../../CourseModules/client';
 
 interface ExpandedModules {
     [key: number]: boolean;
@@ -18,6 +20,8 @@ const CourseHomeContent = () => {
   const { courseId } = useParams();
   const [expandedModules, setExpandedModules] = useState<ExpandedModules>({});
 
+  const [modList, setModList] = useState([]);
+
 
   const toggleModule = (index: number) => {
     setExpandedModules((prevState) => ({
@@ -25,6 +29,12 @@ const CourseHomeContent = () => {
       [index]: !prevState[index],
     }));
   };
+
+  useEffect(() => {
+    client.findModulesForCourse(String(courseId)).then((modules) => 
+    (setModList(modules)));
+  }, [courseId]);
+  
   return (
     <div className="" style={{ 
       margin: '20px 30px',
@@ -87,9 +97,9 @@ const CourseHomeContent = () => {
       <br />
       <hr />
       <ul className="list-group module-list">
-        {modules
-          .filter((module) => module.course === courseId)
-          .map((module, index) => (
+        {modList
+          // .filter((module) => module.course === courseId)
+          .map((module: any, index) => (
             <div key={index}>
               <li
                 className="list-group-item list-group-item-secondary"
@@ -117,7 +127,7 @@ const CourseHomeContent = () => {
 
               {expandedModules[index] &&
                 module.learningObjectives &&
-                module.learningObjectives.map((lesson, lessonIndex) => (
+                module.learningObjectives.map((lesson: any, lessonIndex: number) => (
                   <li
                     key={lessonIndex}
                     className="list-group-item"

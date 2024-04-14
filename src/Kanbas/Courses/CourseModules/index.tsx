@@ -27,7 +27,6 @@ interface ExpandedModules {
 
 const CoursesModules = () => {
   const { courseId } = useParams();
-  console.log("courseId " +courseId)
   const [expandedModules, setExpandedModules] = useState<ExpandedModules>({});
   const moduleList = useSelector((state: KanbasState) => 
     state.modulesReducer.modules);
@@ -161,7 +160,7 @@ const CoursesModules = () => {
       <br/>
       <ul className="list-group module-list">
         {moduleList
-          .filter((module) => module.course === courseId)
+          // .filter((module) => module.course === courseId)
           .map((module, index) => (
             <div key={index}>
               <li
