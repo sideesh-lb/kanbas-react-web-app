@@ -1,0 +1,19 @@
+.input-parent{
+    display: flex;
+    justify-content: center;
+}
+.input-parent > input{
+    width: 100px;
+    border: 1px solid #b52828;
+    border-radius: 4px;
+}
+.input-parent > i{
+    margin-left: 10px;
+    margin-top: 3px;
+}
+.primary-bg{
+    background-color: aliceblue !important;
+}
+.grade-table{
+    max-width: 1300px;
+}
